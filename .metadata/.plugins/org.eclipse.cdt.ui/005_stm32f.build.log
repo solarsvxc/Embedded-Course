@@ -1,0 +1,10 @@
+20:55:05 **** Build of configuration Debug for project 005_stm32f ****
+make -j12 all 
+arm-none-eabi-size  005_stm32f.elf 
+   text	   data	    bss	    dec	    hex	filename
+   4520	     12	   1572	   6104	   17d8	005_stm32f.elf
+Finished building: default.size.stdout
+ 
+
+20:55:07 Build Finished. 0 errors, 0 warnings. (took 1s.577ms)
+

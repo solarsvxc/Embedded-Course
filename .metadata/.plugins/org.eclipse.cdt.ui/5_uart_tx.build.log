@@ -1,0 +1,113 @@
+20:55:11 **** Build of configuration Debug for project 5_uart_tx ****
+make -j12 all 
+arm-none-eabi-gcc "../Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -DSTM32 -DSTM32F4 -DSTM32F411CEUx -c -I"E:/FirmWare Stm32/FirmWare/STM32Cube_FW_F4_V1.28.1/Drivers/CMSIS/Device/ST/STM32F4xx/Include" -I"E:/FirmWare Stm32/FirmWare/STM32Cube_FW_F4_V1.28.1/Drivers/CMSIS/Include" -I../Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Src/main.d" -MT"Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/main.o"
+../Src/main.c: In function 'SystemClock_Config':
+../Src/main.c:58:5: error: 'RCC' undeclared (first use in this function)
+   58 |     RCC->CR |= RCC_CR_HSION;
+      |     ^~~
+../Src/main.c:58:5: note: each undeclared identifier is reported only once for each function it appears in
+../Src/main.c:58:16: error: 'RCC_CR_HSION' undeclared (first use in this function)
+   58 |     RCC->CR |= RCC_CR_HSION;
+      |                ^~~~~~~~~~~~
+../Src/main.c:59:23: error: 'RCC_CR_HSIRDY' undeclared (first use in this function)
+   59 |     while(!(RCC->CR & RCC_CR_HSIRDY)); // Đợi HSI ổn định
+      |                       ^~~~~~~~~~~~~
+../Src/main.c:66:21: error: 'RCC_PLLCFGR_PLLSRC_HSI' undeclared (first use in this function)
+   66 |     RCC->PLLCFGR |= RCC_PLLCFGR_PLLSRC_HSI; // HSI làm nguồn clock cho PLL
+      |                     ^~~~~~~~~~~~~~~~~~~~~~
+../Src/main.c:69:16: error: 'RCC_CR_PLLON' undeclared (first use in this function)
+   69 |     RCC->CR |= RCC_CR_PLLON;
+      |                ^~~~~~~~~~~~
+../Src/main.c:70:23: error: 'RCC_CR_PLLRDY' undeclared (first use in this function)
+   70 |     while(!(RCC->CR & RCC_CR_PLLRDY)); // Đợi PLL lock
+      |                       ^~~~~~~~~~~~~
+../Src/main.c:73:18: error: 'RCC_CFGR_HPRE_DIV1' undeclared (first use in this function)
+   73 |     RCC->CFGR |= RCC_CFGR_HPRE_DIV1;   // AHB prescaler = 1
+      |                  ^~~~~~~~~~~~~~~~~~
+../Src/main.c:74:18: error: 'RCC_CFGR_PPRE1_DIV2' undeclared (first use in this function)
+   74 |     RCC->CFGR |= RCC_CFGR_PPRE1_DIV2;  // APB1 prescaler = 2
+      |                  ^~~~~~~~~~~~~~~~~~~
+../Src/main.c:75:18: error: 'RCC_CFGR_PPRE2_DIV1' undeclared (first use in this function)
+   75 |     RCC->CFGR |= RCC_CFGR_PPRE2_DIV1;  // APB2 prescaler = 1
+      |                  ^~~~~~~~~~~~~~~~~~~
+../Src/main.c:78:18: error: 'RCC_CFGR_SW_PLL' undeclared (first use in this function)
+   78 |     RCC->CFGR |= RCC_CFGR_SW_PLL;
+      |                  ^~~~~~~~~~~~~~~
+../Src/main.c:79:24: error: 'RCC_CFGR_SWS' undeclared (first use in this function)
+   79 |     while((RCC->CFGR & RCC_CFGR_SWS) != RCC_CFGR_SWS_PLL); // Đợi chuyển xong
+      |                        ^~~~~~~~~~~~
+../Src/main.c:79:41: error: 'RCC_CFGR_SWS_PLL' undeclared (first use in this function)
+   79 |     while((RCC->CFGR & RCC_CFGR_SWS) != RCC_CFGR_SWS_PLL); // Đợi chuyển xong
+      |                                         ^~~~~~~~~~~~~~~~
+../Src/main.c:82:5: warning: implicit declaration of function 'SystemCoreClockUpdate' [-Wimplicit-function-declaration]
+   82 |     SystemCoreClockUpdate();
+      |     ^~~~~~~~~~~~~~~~~~~~~
+../Src/main.c: In function 'GPIO_Init':
+../Src/main.c:91:5: error: 'RCC' undeclared (first use in this function)
+   91 |     RCC->AHB1ENR |= RCC_AHB1ENR_GPIOAEN;
+      |     ^~~
+../Src/main.c:91:21: error: 'RCC_AHB1ENR_GPIOAEN' undeclared (first use in this function)
+   91 |     RCC->AHB1ENR |= RCC_AHB1ENR_GPIOAEN;
+      |                     ^~~~~~~~~~~~~~~~~~~
+../Src/main.c:94:5: error: 'GPIOA' undeclared (first use in this function)
+   94 |     GPIOA->MODER &= ~GPIO_MODER_MODER5_0;  // Clear bit 0
+      |     ^~~~~
+../Src/main.c:94:22: error: 'GPIO_MODER_MODER5_0' undeclared (first use in this function)
+   94 |     GPIOA->MODER &= ~GPIO_MODER_MODER5_0;  // Clear bit 0
+      |                      ^~~~~~~~~~~~~~~~~~~
+../Src/main.c:95:21: error: 'GPIO_MODER_MODER5_1' undeclared (first use in this function)
+   95 |     GPIOA->MODER |= GPIO_MODER_MODER5_1;   // Set bit 1 (10: AF mode)
+      |                     ^~~~~~~~~~~~~~~~~~~
+../Src/main.c:98:23: error: 'GPIO_AFRL_AFRL5' undeclared (first use in this function)
+   98 |     GPIOA->AFR[0] &= ~GPIO_AFRL_AFRL5;     // Clear AF
+      |                       ^~~~~~~~~~~~~~~
+../Src/main.c:102:23: error: 'GPIO_OSPEEDER_OSPEEDR5' undeclared (first use in this function)
+  102 |     GPIOA->OSPEEDR |= GPIO_OSPEEDER_OSPEEDR5;
+      |                       ^~~~~~~~~~~~~~~~~~~~~~
+../Src/main.c:105:22: error: 'GPIO_PUPDR_PUPDR5' undeclared (first use in this function)
+  105 |     GPIOA->PUPDR &= ~GPIO_PUPDR_PUPDR5;
+      |                      ^~~~~~~~~~~~~~~~~
+../Src/main.c: In function 'TIM2_Init':
+../Src/main.c:114:5: error: 'RCC' undeclared (first use in this function)
+  114 |     RCC->APB1ENR |= RCC_APB1ENR_TIM2EN;
+      |     ^~~
+../Src/main.c:114:21: error: 'RCC_APB1ENR_TIM2EN' undeclared (first use in this function)
+  114 |     RCC->APB1ENR |= RCC_APB1ENR_TIM2EN;
+      |                     ^~~~~~~~~~~~~~~~~~
+../Src/main.c:117:5: error: 'TIM2' undeclared (first use in this function)
+  117 |     TIM2->CR1 = 0;
+      |     ^~~~
+../Src/main.c:129:21: error: 'TIM_CCMR1_OC1M' undeclared (first use in this function)
+  129 |     TIM2->CCMR1 &= ~TIM_CCMR1_OC1M;
+      |                     ^~~~~~~~~~~~~~
+../Src/main.c:130:21: error: 'TIM_CCMR1_OC1M_1' undeclared (first use in this function)
+  130 |     TIM2->CCMR1 |= (TIM_CCMR1_OC1M_1 | TIM_CCMR1_OC1M_2); // 0110: PWM mode 1
+      |                     ^~~~~~~~~~~~~~~~
+../Src/main.c:130:40: error: 'TIM_CCMR1_OC1M_2' undeclared (first use in this function)
+  130 |     TIM2->CCMR1 |= (TIM_CCMR1_OC1M_1 | TIM_CCMR1_OC1M_2); // 0110: PWM mode 1
+      |                                        ^~~~~~~~~~~~~~~~
+../Src/main.c:133:20: error: 'TIM_CCMR1_OC1PE' undeclared (first use in this function)
+  133 |     TIM2->CCMR1 |= TIM_CCMR1_OC1PE;
+      |                    ^~~~~~~~~~~~~~~
+../Src/main.c:136:18: error: 'TIM_CR1_ARPE' undeclared (first use in this function)
+  136 |     TIM2->CR1 |= TIM_CR1_ARPE;
+      |                  ^~~~~~~~~~~~
+../Src/main.c:139:19: error: 'TIM_CCER_CC1E' undeclared (first use in this function)
+  139 |     TIM2->CCER |= TIM_CCER_CC1E;
+      |                   ^~~~~~~~~~~~~
+../Src/main.c:142:18: error: 'TIM_CR1_CEN' undeclared (first use in this function)
+  142 |     TIM2->CR1 |= TIM_CR1_CEN;
+      |                  ^~~~~~~~~~~
+../Src/main.c: In function 'delay_ms':
+../Src/main.c:152:9: warning: implicit declaration of function '__NOP' [-Wimplicit-function-declaration]
+  152 |         __NOP(); // No operation
+      |         ^~~~~
+../Src/main.c: In function 'setServoAngle':
+../Src/main.c:170:5: error: 'TIM2' undeclared (first use in this function)
+  170 |     TIM2->CCR1 = pulse;
+      |     ^~~~
+make: *** [Src/subdir.mk:25: Src/main.o] Error 1
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+
+20:55:12 Build Failed. 32 errors, 2 warnings. (took 295ms)
+

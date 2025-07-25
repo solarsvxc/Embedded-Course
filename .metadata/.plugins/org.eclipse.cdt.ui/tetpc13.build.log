@@ -1,0 +1,70 @@
+19:45:01 **** Incremental Build of configuration Debug for project tetpc13 ****
+make -j12 all 
+arm-none-eabi-gcc "../Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -DSTM32 -DSTM32F4 -DSTM32F411CEUx -c -I"E:/FirmWare Stm32/FirmWare/STM32Cube_FW_F4_V1.28.1/Drivers/CMSIS/Device/ST/STM32F4xx/Include" -I"E:/FirmWare Stm32/FirmWare/STM32Cube_FW_F4_V1.28.1/Drivers/CMSIS/Include" -I../Inc -I"E:/FirmWare Stm32/FirmWare/STM32Cube_FW_F4_V1.28.0/Drivers/CMSIS/Device/ST/STM32F4xx/Include" -I"E:/FirmWare Stm32/FirmWare/STM32Cube_FW_F4_V1.28.0/Drivers/CMSIS/Include" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Src/main.d" -MT"Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/main.o"
+../Src/main.c: In function 'main':
+../Src/main.c:8:3: warning: implicit declaration of function 'HAL_Init' [-Wimplicit-function-declaration]
+    8 |   HAL_Init();                     // Khởi tạo HAL Library
+      |   ^~~~~~~~
+../Src/main.c:14:5: warning: implicit declaration of function 'HAL_GPIO_TogglePin' [-Wimplicit-function-declaration]
+   14 |     HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_13);  // Đảo trạng thái chân PC13
+      |     ^~~~~~~~~~~~~~~~~~
+../Src/main.c:14:24: error: 'GPIOC' undeclared (first use in this function)
+   14 |     HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_13);  // Đảo trạng thái chân PC13
+      |                        ^~~~~
+../Src/main.c:14:24: note: each undeclared identifier is reported only once for each function it appears in
+../Src/main.c:14:31: error: 'GPIO_PIN_13' undeclared (first use in this function)
+   14 |     HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_13);  // Đảo trạng thái chân PC13
+      |                               ^~~~~~~~~~~
+../Src/main.c:15:5: warning: implicit declaration of function 'HAL_Delay' [-Wimplicit-function-declaration]
+   15 |     HAL_Delay(500);                          // Delay 500ms
+      |     ^~~~~~~~~
+../Src/main.c: In function 'MX_GPIO_Init':
+../Src/main.c:20:3: warning: implicit declaration of function '__HAL_RCC_GPIOC_CLK_ENABLE' [-Wimplicit-function-declaration]
+   20 |   __HAL_RCC_GPIOC_CLK_ENABLE();         // Bật clock cho GPIOC
+      |   ^~~~~~~~~~~~~~~~~~~~~~~~~~
+../Src/main.c:22:3: error: unknown type name 'GPIO_InitTypeDef'
+   22 |   GPIO_InitTypeDef GPIO_InitStruct = {0};
+      |   ^~~~~~~~~~~~~~~~
+../Src/main.c:24:18: error: request for member 'Pin' in something not a structure or union
+   24 |   GPIO_InitStruct.Pin = GPIO_PIN_13;    // Chọn chân PC13
+      |                  ^
+../Src/main.c:24:25: error: 'GPIO_PIN_13' undeclared (first use in this function)
+   24 |   GPIO_InitStruct.Pin = GPIO_PIN_13;    // Chọn chân PC13
+      |                         ^~~~~~~~~~~
+../Src/main.c:25:18: error: request for member 'Mode' in something not a structure or union
+   25 |   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;  // Output Push-Pull
+      |                  ^
+../Src/main.c:25:26: error: 'GPIO_MODE_OUTPUT_PP' undeclared (first use in this function)
+   25 |   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;  // Output Push-Pull
+      |                          ^~~~~~~~~~~~~~~~~~~
+../Src/main.c:26:18: error: request for member 'Pull' in something not a structure or union
+   26 |   GPIO_InitStruct.Pull = GPIO_NOPULL;   // Không dùng pull-up/down
+      |                  ^
+../Src/main.c:26:26: error: 'GPIO_NOPULL' undeclared (first use in this function)
+   26 |   GPIO_InitStruct.Pull = GPIO_NOPULL;   // Không dùng pull-up/down
+      |                          ^~~~~~~~~~~
+../Src/main.c:27:18: error: request for member 'Speed' in something not a structure or union
+   27 |   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW; // Tốc độ thấp
+      |                  ^
+../Src/main.c:27:27: error: 'GPIO_SPEED_FREQ_LOW' undeclared (first use in this function)
+   27 |   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW; // Tốc độ thấp
+      |                           ^~~~~~~~~~~~~~~~~~~
+../Src/main.c:29:3: warning: implicit declaration of function 'HAL_GPIO_Init'; did you mean 'MX_GPIO_Init'? [-Wimplicit-function-declaration]
+   29 |   HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);     // Áp dụng cấu hình
+      |   ^~~~~~~~~~~~~
+      |   MX_GPIO_Init
+../Src/main.c:29:17: error: 'GPIOC' undeclared (first use in this function)
+   29 |   HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);     // Áp dụng cấu hình
+      |                 ^~~~~
+../Src/main.c:31:3: warning: implicit declaration of function 'HAL_GPIO_WritePin' [-Wimplicit-function-declaration]
+   31 |   HAL_GPIO_WritePin(GPIOC, GPIO_PIN_13, GPIO_PIN_SET); // Tắt LED ban đầu (trên Blue Pill, LED tắt khi ở mức HIGH)
+      |   ^~~~~~~~~~~~~~~~~
+../Src/main.c:31:41: error: 'GPIO_PIN_SET' undeclared (first use in this function)
+   31 |   HAL_GPIO_WritePin(GPIOC, GPIO_PIN_13, GPIO_PIN_SET); // Tắt LED ban đầu (trên Blue Pill, LED tắt khi ở mức HIGH)
+      |                                         ^~~~~~~~~~~~
+make[1]: *** [Src/subdir.mk:25: Src/main.o] Error 1
+make: *** [makefile:63: all] Error 2
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+
+19:45:01 Build Failed. 15 errors, 6 warnings. (took 298ms)
+

@@ -1,0 +1,66 @@
+20:55:07 **** Build of configuration Debug for project 1_005_stm32f2_struct ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c:40:18: error: unknown type name 'uint32_t'
+   40 |         volatile uint32_t DUMMY[12];
+      |                  ^~~~~~~~
+../Core/Src/main.c:41:18: error: unknown type name 'uint32_t'
+   41 |         volatile uint32_t AHB1ENR;
+      |                  ^~~~~~~~
+../Core/Src/main.c:45:18: error: unknown type name 'uint32_t'
+   45 |         volatile uint32_t MODER;
+      |                  ^~~~~~~~
+../Core/Src/main.c:46:18: error: unknown type name 'uint32_t'
+   46 |         volatile uint32_t DUMMY[4];
+      |                  ^~~~~~~~
+../Core/Src/main.c:47:18: error: unknown type name 'uint32_t'
+   47 |         volatile uint32_t ODR;
+      |                  ^~~~~~~~
+In file included from ../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f1xx.h:130,
+                 from ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h:29,
+                 from ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h:27,
+                 from ../Core/Inc/stm32f1xx_hal_conf.h:238,
+                 from ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.c:56:
+../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xb.h:575: warning: "PERIPH_BASE" redefined
+  575 | #define PERIPH_BASE           0x40000000UL /*!< Peripheral base address in the alias region */
+      | 
+../Core/Src/main.c:19: note: this is the location of the previous definition
+   19 | #define PERIPH_BASE (0x4000 000UL)
+      | 
+../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xb.h:602: warning: "GPIOA_BASE" redefined
+  602 | #define GPIOA_BASE            (APB2PERIPH_BASE + 0x00000800UL)
+      | 
+../Core/Src/main.c:24: note: this is the location of the previous definition
+   24 | #define GPIOA_BASE (AHB1PERIPH_BASE + GPIOA_OFFSET)
+      | 
+../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xb.h:622: warning: "RCC_BASE" redefined
+  622 | #define RCC_BASE              (AHBPERIPH_BASE + 0x00001000UL)
+      | 
+../Core/Src/main.c:27: note: this is the location of the previous definition
+   27 | #define RCC_BASE (AHB1PERIPH_BASE + RCC_OFFSET)
+      | 
+../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xb.h:664: warning: "GPIOA" redefined
+  664 | #define GPIOA               ((GPIO_TypeDef *)GPIOA_BASE)
+      | 
+../Core/Src/main.c:51: note: this is the location of the previous definition
+   51 | #define GPIOA  ((GPIO_Typedef*)GPIOA_OFFSET)
+      | 
+../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xb.h:683: warning: "RCC" redefined
+  683 | #define RCC                 ((RCC_TypeDef *)RCC_BASE)
+      | 
+../Core/Src/main.c:50: note: this is the location of the previous definition
+   50 | #define RCC ((RCC_Typedef*)RCC_BASE)
+      | 
+../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h:1216: warning: "RCC_OFFSET" redefined
+ 1216 | #define RCC_OFFSET                (RCC_BASE - PERIPH_BASE)
+      | 
+../Core/Src/main.c:26: note: this is the location of the previous definition
+   26 | #define RCC_OFFSET (0x3800UL)
+      | 
+make: *** [Core/Src/subdir.mk:34: Core/Src/main.o] Error 1
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+
+20:55:09 Build Failed. 6 errors, 6 warnings. (took 2s.15ms)
+

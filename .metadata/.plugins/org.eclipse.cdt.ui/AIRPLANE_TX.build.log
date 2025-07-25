@@ -1,0 +1,26 @@
+20:55:16 **** Build of configuration Debug for project AIRPLANE_TX ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/transmitter_RC.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/transmitter_RC.d" -MT"Core/Src/transmitter_RC.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/transmitter_RC.o"
+../Core/Src/transmitter_RC.c: In function 'main':
+../Core/Src/transmitter_RC.c:26:33: warning: pointer targets in passing argument 1 of 'sprintf' differ in signedness [-Wpointer-sign]
+   26 |                         sprintf(TxData,"var=%d\r\n",var++);
+      |                                 ^~~~~~
+      |                                 |
+      |                                 uint8_t * {aka unsigned char *}
+In file included from ../Core/Src/transmitter_RC.c:4:
+E:\stm32cubeide\STM32CubeIDE_1.18.0\STM32CubeIDE\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.13.3.rel1.win32_1.0.0.202411081344\tools\bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/include/stdio.h:250:18: note: expected 'char * restrict' but argument is of type 'uint8_t *' {aka 'unsigned char *'}
+  250 | int     sprintf (char *__restrict, const char *__restrict, ...)
+      |                  ^
+arm-none-eabi-gcc -o "AIRPLANE_TX.elf" @"objects.list"   -mcpu=cortex-m4 -T"E:\stm32cubeide\workspace\AIRPLANE_TX\STM32F411CEUX_FLASH.ld" --specs=nosys.specs -Wl,-Map="AIRPLANE_TX.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+E:/stm32cubeide/STM32CubeIDE_1.18.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.13.3.rel1.win32_1.0.0.202411081344/tools/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/bin/ld.exe: ./Core/Src/stm32f4xx_it.o: in function `SysTick_Handler':
+E:/stm32cubeide/workspace/AIRPLANE_TX/Debug/../Core/Src/stm32f4xx_it.c:184: multiple definition of `SysTick_Handler'; ./Core/Src/delay.o:E:/stm32cubeide/workspace/AIRPLANE_TX/Debug/../Core/Src/delay.c:32: first defined here
+E:/stm32cubeide/STM32CubeIDE_1.18.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.13.3.rel1.win32_1.0.0.202411081344/tools/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/bin/ld.exe: ./Core/Src/transmitter_RC.o: in function `main':
+E:/stm32cubeide/workspace/AIRPLANE_TX/Debug/../Core/Src/transmitter_RC.c:21:(.text.main+0xe): undefined reference to `NRF24_Init'
+E:/stm32cubeide/STM32CubeIDE_1.18.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.13.3.rel1.win32_1.0.0.202411081344/tools/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/bin/ld.exe: E:/stm32cubeide/workspace/AIRPLANE_TX/Debug/../Core/Src/transmitter_RC.c:22:(.text.main+0x16): undefined reference to `NRF24_TxMode'
+E:/stm32cubeide/STM32CubeIDE_1.18.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.13.3.rel1.win32_1.0.0.202411081344/tools/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/bin/ld.exe: E:/stm32cubeide/workspace/AIRPLANE_TX/Debug/../Core/Src/transmitter_RC.c:27:(.text.main+0x32): undefined reference to `NRF24_Transmit'
+collect2.exe: error: ld returned 1 exit status
+make: *** [makefile:64: AIRPLANE_TX.elf] Error 1
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+
+20:55:17 Build Failed. 5 errors, 1 warnings. (took 1s.15ms)
+

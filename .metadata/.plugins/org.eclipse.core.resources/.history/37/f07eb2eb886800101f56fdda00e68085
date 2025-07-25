@@ -1,0 +1,56 @@
+
+
+#include <stdint.h>
+
+#if !defined(__SOFT_FP__) && defined(__ARM_FP)
+  #warning "FPU is not initialized, but the project is compiling for an FPU. Please initialize the FPU before use."
+#endif
+
+// 1 BASE PERIPHERAL
+#define PERIPH_BASE 	(0x4000 0000UL)
+// 2 PERIPHERAL OFFSET BUS
+#define AHB1_OFFSET 	(0x0002 0000UL)
+// 3 AHB1 BASE BUS ADDRESS REGISTER
+#define AHB1BASE_R 		(PERIPH_BASE + AHB1_OFFSET)
+// 4 OFFSET GPIOA
+#define GPIOA_OFFSET 	(0x00UL)
+// 5 GPIOA BASE ADDRESS
+#define GPIOA_BASE_R 	(AHB1BASE_R + GPIOA_OFFSET)
+// 6 RCC OFFSET
+#define RCC_OFFSET 		(0x3800UL)
+// 7 RCC BASE ADDRESS REGISTER
+#define RCC_BASE_R  		(AHB1BASE_R + RCC_OFFSET)
+// 8 AHB1ENR RCC OFFSET
+#define AHB1_RCC_OFFSET (0x30UL)
+// 9 AHB1ENR  RCC BASE ADDRESS
+#define AHB1_RCC_R 		(*(volatile unsigned int *)(RCC_BASE_R + AHB1_RCC_OFFSET))
+// 10 OFFSET GPIOA_MODER
+#define GPIOA_MODE_OFFSET (0x00UL)
+// 11 GPIOA MODER REGISTER
+#define GPIOA_MODE_R  	(*(volatile unsigned int *)(GPIOA_BASE_R + GPIOA_MODE_OFFSET))
+// 12 GPIOA PORT OUTPUT REGISTER OFFSET
+#define GPIOA_OD_OFFSET (0x14UL)
+// 13 GPIOA PORT OUTPUT REGISTER ADDRESS
+#define GPIOA_OD_R 		(*(volatile unsigned int *)(GPIOA_BASE_R + GPIOA_OD_OFFSET))
+// 14 ENABLE GPIOA  bit mask)
+#define GPIOA_EN (1<<0)
+// 15 ENABLE PIN5 (set bit mask at ODR register as output at bit 5)
+#define PIN5 (1<<5)
+// 16 LED PIN
+#define LEDPIN PIN5
+
+int main(void)
+{
+	// 17 ACCESS CLOCK RCC TO GPIOA
+	AHB1_RCC_R |= GPIOA_EN;
+	// 18 SET MODER REGISTER AS OUTPUT PIN 5 AT BIT 10 11 [2Y;2Y+1]
+	GPIOA_MODE_R |= (1U<<10);
+	// 19 SET MODER REGISTER AS OUTPUT PIN 5 AT BIT 10 11 [2Y;2Y+1]
+	GPIOA_MODE_R &= ~(1U<<11);
+
+	while(1){
+		// 20 SET BIT 5 TO (1) AS OUTPUT DATA
+		GPIOA_OD_R |= (1U<< LEDPIN);
+	}
+
+}

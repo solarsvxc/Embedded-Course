@@ -1,0 +1,71 @@
+20:55:09 **** Build of configuration Debug for project 2_gpio ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -DSTM32 -DSTM32F4 -DSTM32F411CEUx -c -I"E:/FirmWare Stm32/FirmWare/STM32Cube_FW_F4_V1.28.1/Drivers/CMSIS/Device/ST/STM32F4xx/Include" -I"E:/FirmWare Stm32/FirmWare/STM32Cube_FW_F4_V1.28.1/Drivers/CMSIS/Include" -I../Inc -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c:3: warning: "PERIPH_BASE" redefined
+    3 | #define PERIPH_BASE 0x4000 000UL
+      | 
+In file included from ../Core/Src/main.c:1:
+../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f411xe.h:638: note: this is the location of the previous definition
+  638 | #define PERIPH_BASE           0x40000000UL /*!< Peripheral base address in the alias region                                */
+      | 
+../Core/Src/main.c:5: warning: "AHB1PERIPH_BASE" redefined
+    5 | #define AHB1PERIPH_BASE (PERIPH_BASE + AHB1ERPH_OFFSET)
+      | 
+../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f411xe.h:653: note: this is the location of the previous definition
+  653 | #define AHB1PERIPH_BASE       (PERIPH_BASE + 0x00020000UL)
+      | 
+../Core/Src/main.c:8: warning: "GPIOA_BASE" redefined
+    8 | #define GPIOA_BASE (AHB1PERIPH_BASE + GPIOA_OFFSET)
+      | 
+../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f411xe.h:693: note: this is the location of the previous definition
+  693 | #define GPIOA_BASE            (AHB1PERIPH_BASE + 0x0000UL)
+      | 
+../Core/Src/main.c:11: warning: "RCC_BASE" redefined
+   11 | #define RCC_BASE (AHB1PERIPH_BASE + RCC_OFFSET)
+      | 
+../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f411xe.h:700: note: this is the location of the previous definition
+  700 | #define RCC_BASE              (AHB1PERIPH_BASE + 0x3800UL)
+      | 
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:3:28: error: expected ')' before numeric constant
+    3 | #define PERIPH_BASE 0x4000 000UL
+      |                            ^~~~~
+../Core/Src/main.c:5:26: note: in expansion of macro 'PERIPH_BASE'
+    5 | #define AHB1PERIPH_BASE (PERIPH_BASE + AHB1ERPH_OFFSET)
+      |                          ^~~~~~~~~~~
+../Core/Src/main.c:11:19: note: in expansion of macro 'AHB1PERIPH_BASE'
+   11 | #define RCC_BASE (AHB1PERIPH_BASE + RCC_OFFSET)
+      |                   ^~~~~~~~~~~~~~~
+../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f411xe.h:789:46: note: in expansion of macro 'RCC_BASE'
+  789 | #define RCC                 ((RCC_TypeDef *) RCC_BASE)
+      |                                              ^~~~~~~~
+../Core/Src/main.c:20:9: note: in expansion of macro 'RCC'
+   20 |         RCC->AH
+      |         ^~~
+../Core/Src/main.c:5:25: note: to match this '('
+    5 | #define AHB1PERIPH_BASE (PERIPH_BASE + AHB1ERPH_OFFSET)
+      |                         ^
+../Core/Src/main.c:11:19: note: in expansion of macro 'AHB1PERIPH_BASE'
+   11 | #define RCC_BASE (AHB1PERIPH_BASE + RCC_OFFSET)
+      |                   ^~~~~~~~~~~~~~~
+../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f411xe.h:789:46: note: in expansion of macro 'RCC_BASE'
+  789 | #define RCC                 ((RCC_TypeDef *) RCC_BASE)
+      |                                              ^~~~~~~~
+../Core/Src/main.c:20:9: note: in expansion of macro 'RCC'
+   20 |         RCC->AH
+      |         ^~~
+../Core/Src/main.c:20:12: error: 'RCC_TypeDef' has no member named 'AH'
+   20 |         RCC->AH
+      |            ^~
+../Core/Src/main.c:20:16: error: expected ';' before '}' token
+   20 |         RCC->AH
+      |                ^
+      |                ;
+   21 | 
+   22 | }
+      | ~               
+make: *** [Core/Src/subdir.mk:34: Core/Src/main.o] Error 1
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+
+20:55:10 Build Failed. 4 errors, 4 warnings. (took 1s.1ms)
+

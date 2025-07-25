@@ -1,0 +1,7 @@
+1747167304855	Delete resource 'AIRPLANE_HAL/Core/Src/delay'
+1747167894370	Rename resource 'AIRPLANE_HAL'
+1747167995515	Delete resource 'AIRPLANE_RC'
+1747168009649	Rename resource 'AIRPLANE_HAL_RECEIVER'
+1747168887722	Delete resource 'AIRPLANE_TX/Core/Src/led.h'
+1747169355052	Delete resource 'AIRPLANE_RC/Core/Src/nRF24L01.c'
+1747169465715	Delete resource 'AIRPLANE_TX/Core/Src/nRF24L01.c'
