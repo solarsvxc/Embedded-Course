@@ -118,28 +118,6 @@ void delay_ms(uint32_t delayms, unsigned int  one_msec_load )
  * 
  * @param pinMask 
  */
-void led_on(uint32_t pinMask)
-{
-    //toggle ^ (reverse state of pin)
-    GPIOA_ODR ^= pinMask;
-}
-
-/**
- * @brief 
- * 
- * @param pinMask 
- */
-void led_off(uint32_t pinMask)
-{
-    //clear bit field
-    GPIOA_ODR &= ~pinMask;
-}
-
-/**
- * @brief 
- * 
- * @param pinMask 
- */
 void led_toggle(uint32_t pinMask)
 {
     GPIOA_ODR ^= pinMask;
@@ -168,39 +146,39 @@ int btn_state(uint32_t pin_btn)
  */
 int main(void)
 {
-RCC_AHB1ENR |= GPIOA_ENR;                   /*!< Enable RCC clock access on AHB1 bus for GPIOA */
-led_init();                                
-button_init();                                
+    RCC_AHB1ENR |= GPIOA_ENR;                   /*!< Enable RCC clock access on AHB1 bus for GPIOA */
+    led_init();                                
+    button_init();                                
 /**
  * @brief 
  * 
  */
-while(1)
-{
-    volatile int btn_left_state = btn_state(PA4_BTN_1);
-    volatile int btn_right_state = btn_state(PA5_BTN_2);
+    while(1)
+    {
+        volatile int btn_left_state = btn_state(PA4_BTN_1);
+        volatile int btn_right_state = btn_state(PA5_BTN_2);
 
-    if(btn_left_state == 1 && btn_right_state == 1)
-    {
-        led_toggle(PA1_LED_GREEN);
-        delay_ms(3000,16000);
-    } 
-    else if(btn_left_state == 0 && btn_right_state == 0)
-    {
-        led_toggle(PA1_LED_GREEN);
-        led_toggle(PA2_LED_RED);
-        led_toggle(PA3_LED_WHITE);
-    } 
-    else if(btn_left_state == 0 && btn_right_state == 1) 
-    {
-        led_toggle(PA1_LED_GREEN);
-        delay_ms(1000,16000);
+        if(btn_left_state == 1 && btn_right_state == 1)
+        {
+            led_toggle(PA1_LED_GREEN);
+            delay_ms(3000,16000);   
+        } 
+        else if(btn_left_state == 0 && btn_right_state == 0)
+        {
+            led_toggle(PA1_LED_GREEN);
+            led_toggle(PA2_LED_RED);
+            led_toggle(PA3_LED_WHITE);
+        } 
+        else if(btn_left_state == 0 && btn_right_state == 1) 
+        {
+            led_toggle(PA1_LED_GREEN);
+            delay_ms(1000,16000);
+        }
+        else if(btn_left_state == 1 && btn_right_state == 0)
+        {
+    	    led_off(PA1_LED_GREEN);
+            led_toggle(PA3_LED_WHITE);
+        }
     }
-    else if(btn_left_state == 1 && btn_right_state == 0)
-    {
-    	led_off(PA1_LED_GREEN);
-        led_toggle(PA3_LED_WHITE);
-    }
-}
 
 }
