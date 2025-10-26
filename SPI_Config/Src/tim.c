@@ -6,10 +6,13 @@
  */
 
 #include "tim.h"
+
 // ENABLE TIM2 default is set bit 0 || 1 is enable
 #define TIM2EN (1U<<0)
 #define CR1_EN (1U<<0)
-void tim2_1hz_init(void){
+
+void tim2_1hz_init(void)
+{
         /* enable clock to tim2 */
         RCC->AHB1ENR |= TIM2EN;
         // 0 -> 1599 = 1600 value
@@ -20,5 +23,4 @@ void tim2_1hz_init(void){
         TIM2->CNT = 0;
         // enable timer
         TIM2->CR1=CR1_EN;
-
 }
