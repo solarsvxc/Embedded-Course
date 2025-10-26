@@ -6,6 +6,9 @@
 
 #include "stm32f4xx.h"
 #include "spi.h"
+#include "tim.h"
+#include "icm20948.h"
+#include "systick.h"
 #include <math.h>
 
 // ============= ICM20948 Register Map =============
@@ -84,46 +87,10 @@
 
 #define MAG_SCALE_FACTOR            (4912.0f / 32768.0f)
 
-// Cấu trúc dữ liệu ICM20948
-typedef struct {
-    int16_t accel_x;
-    int16_t accel_y;
-    int16_t accel_z;
-    int16_t gyro_x;
-    int16_t gyro_y;
-    int16_t gyro_z;
-    int16_t mag_x;
-    int16_t mag_y;
-    int16_t mag_z;
-    int16_t temperature;
-    
-    float accel_x_g;
-    float accel_y_g;
-    float accel_z_g;
-    float gyro_x_dps;
-    float gyro_y_dps;
-    float gyro_z_dps;
-    float mag_x_ut;
-    float mag_y_ut;
-    float mag_z_ut;
-    float temp_c;
-} ICM20948_Data;
 
 // Scale factors (có thể thay đổi theo config)
 static float gyro_scale = GYRO_SCALE_250DPS;
 static float accel_scale = ACCEL_SCALE_2G;
-
-// ============= Delay Functions =============
-
-void delay_us(uint32_t us) {
-    for(volatile uint32_t i = 0; i < us * 10; i++);
-}
-
-void delay_ms(uint32_t ms) {
-    for(volatile uint32_t i = 0; i < ms * 10000; i++);
-}
-
-// ============= ICM20948 Low-Level Functions =============
 
 /**
  * @brief Đọc 1 byte từ register
@@ -131,6 +98,7 @@ void delay_ms(uint32_t ms) {
  * @return giá trị đọc được
  */
 uint8_t ICM20948_ReadByte(uint8_t reg) {
+
     uint8_t tx_data = reg | 0x80; // Set bit 7 để đọc
     uint8_t rx_data;
     
@@ -450,47 +418,39 @@ float ICM20948_GetHeading(ICM20948_Data *data) {
 
 // ============= Main Program Example =============
 
-int main(void) {
-    ICM20948_Data imu_data;
-    float roll, pitch, heading;
+// int main(void) {
+//     ICM20948_Data imu_data;
+//     float roll, pitch, heading;
     
-    // Khởi tạo SPI1
-    spi1_init();
-    spi1_config();
+//     // Khởi tạo SPI1
+//     spi1_init();
+//     spi1_config();
     
-    // CS mặc định HIGH
-    cs_disable();
+//     // CS mặc định HIGH
+//     cs_disable();
     
-    delay_ms(100);
+//     delay_ms(100);
     
-    // Khởi tạo ICM20948
-    if(!ICM20948_Init()) {
-        // Lỗi khởi tạo - LED nháy hoặc xử lý lỗi
-        while(1) {
-            // Trapped here
-            delay_ms(500);
-        }
-    }
+//     // Khởi tạo ICM20948
+//     if(!ICM20948_Init()) {
+//         // Lỗi khởi tạo - LED nháy hoặc xử lý lỗi
+//         while(1) {
+//             // Trapped here
+//             delay_ms(500);
+//         }
+//     }
     
-    // Khởi tạo thành công
-    while(1) {
-        // Đọc tất cả dữ liệu
-        ICM20948_ReadAll(&imu_data);
+//     // Khởi tạo thành công
+//     while(1) {
+//         // Đọc tất cả dữ liệu
+//         ICM20948_ReadAll(&imu_data);
         
-        // Tính góc nghiêng
-        ICM20948_GetAngles(&imu_data, &roll, &pitch);
+//         // Tính góc nghiêng
+//         ICM20948_GetAngles(&imu_data, &roll, &pitch);
         
-        // Tính hướng la bàn
-        heading = ICM20948_GetHeading(&imu_data);
+//         // Tính hướng la bàn
+//         heading = ICM20948_GetHeading(&imu_data);
         
-        // Sử dụng dữ liệu:
-        // - imu_data.accel_x_g (gia tốc X, đơn vị g)
-        // - imu_data.gyro_y_dps (vận tốc góc Y, đơn vị °/s)
-        // - imu_data.mag_z_ut (từ trường Z, đơn vị µT)
-        // - imu_data.temp_c (nhiệt độ, đơn vị °C)
-        // - roll, pitch (góc nghiêng, đơn vị độ)
-        // - heading (hướng la bàn, 0-360 độ)
-        
-        delay_ms(100); // Đọc mỗi 100ms (10Hz)
-    }
-}
+//         delay_ms(100); // Đọc mỗi 100ms (10Hz)
+//     }
+// }
