@@ -4,7 +4,7 @@
  * SPI1: PA5(SCK), PA6(MISO), PA7(MOSI), PA4(CS)
  */
 
-#include "stm32f4xx.h"
+#include "icm20948.h"
 #include <math.h>
 
 // ============= ICM20948 Register Map =============
