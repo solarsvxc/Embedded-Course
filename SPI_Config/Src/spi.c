@@ -123,7 +123,7 @@ void spi1_transmit(uint8_t *data, uint32_t size)
         while (!(SPI1->SR & (SR_TXE))){}
 
         /* Write data to data register */
-        SPI1->DR    = data[j];
+        SPI1->DR   = data[j];
         j++;
     }
     

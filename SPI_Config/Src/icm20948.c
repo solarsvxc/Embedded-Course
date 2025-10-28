@@ -329,6 +329,7 @@ void ICM20948_ReadGyro(ICM20948_Data *data) {
  * @param data: con trỏ đến cấu trúc ICM20948_Data
  */
 void ICM20948_ReadMag(ICM20948_Data *data) {
+    
     uint8_t buffer[9];
 
     ICM20948_SelectBank(0);
@@ -369,7 +370,8 @@ void ICM20948_ReadTemp(ICM20948_Data *data) {
  * @brief Đọc tất cả dữ liệu cảm biến
  * @param data: con trỏ đến cấu trúc ICM20948_Data
  */
-void ICM20948_ReadAll(ICM20948_Data *data) {
+void ICM20948_ReadAll(ICM20948_Data *data) 
+{
     ICM20948_ReadAccel(data);
     ICM20948_ReadGyro(data);
     ICM20948_ReadMag(data);
@@ -393,7 +395,8 @@ void ICM20948_GetAngles(ICM20948_Data *data, float *roll, float *pitch) {
  * @param data: con trỏ đến cấu trúc ICM20948_Data
  * @return góc hướng (0-360 độ)
  */
-float ICM20948_GetHeading(ICM20948_Data *data) {
+float ICM20948_GetHeading(ICM20948_Data *data) 
+{
     float heading = atan2f(data->mag_y_ut, data->mag_x_ut) * 180.0f / 3.14159265f;
 
     if(heading < 0) {
@@ -409,12 +412,14 @@ float ICM20948_GetHeading(ICM20948_Data *data) {
  * @param data 
  * @param samples 
  */
-void ICM20948_CalibrateMag(ICM20948_Data *data, uint16_t samples) {
+void ICM20948_CalibrateMag(ICM20948_Data *data, uint16_t samples) 
+{
     float max_x = -32768, min_x = 32767;
     float max_y = -32768, min_y = 32767;
     float max_z = -32768, min_z = 32767;
 
-    for(uint16_t i = 0; i < samples; i++) {
+    for(uint16_t i = 0; i < samples; i++) 
+    {
         ICM20948_ReadMag(data);
 
         if(data->mag_x > max_x) max_x = data->mag_x;
