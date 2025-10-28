@@ -1,10 +1,3 @@
-/**
- * @file icm20948.h
- * @brief Header file for the ICM20948 9-Axis IMU Driver for STM32.
- * File này chứa các cấu trúc dữ liệu public và các nguyên mẫu hàm (prototypes)
- * cho phép các file khác (như main.c) tương tác với cảm biến.
- */
-
 #ifndef __ICM20948_H
 #define __ICM20948_H
 
@@ -12,10 +5,8 @@
 extern "C" {
 #endif
 
-#include <stdint.h> // Để định nghĩa các kiểu int16_t, uint8_t
-#include <math.h>   // Để file .c sử dụng M_PI hoặc tương tự (nếu cần)
-
-// ============= Cấu trúc dữ liệu Public =============
+#include <stdint.h> 
+#include <math.h>  
 
 /**
  * @brief Cấu trúc lưu trữ dữ liệu thô (raw) và dữ liệu đã chuyển đổi
@@ -47,13 +38,10 @@ typedef struct {
     float temp_c;     // Đơn vị độ C
 } ICM20948_Data;
 
-
-// ============= Nguyên mẫu hàm (Function Prototypes) =============
-
 /**
  * @brief Khởi tạo cảm biến ICM20948.
  * @note  Hàm này thực hiện reset, cấu hình clock, bật cảm biến,
- * cấu hình Gyro, Accel, và I2C Master để đọc Magnetometer.
+ * cấu hình Gyro, Accel, và SPI Master để đọc Magnetometer.
  * @return 1 nếu khởi tạo thành công, 0 nếu thất bại (sai WHO_AM_I).
  */
 uint8_t ICM20948_Init(void);
@@ -72,7 +60,7 @@ void ICM20948_ReadGyro(ICM20948_Data *data);
 
 /**
  * @brief Đọc dữ liệu Magnetometer (cả thô và chuyển đổi).
- * @note  Đọc từ các thanh ghi External Sensor Data (do I2C Master tự động đọc).
+ * @note  Đọc từ các thanh ghi External Sensor Data (do SPI Master tự động đọc).
  * @param data: Con trỏ đến cấu trúc ICM20948_Data để lưu dữ liệu.
  */
 void ICM20948_ReadMag(ICM20948_Data *data);
@@ -105,6 +93,8 @@ void ICM20948_GetAngles(ICM20948_Data *data, float *roll, float *pitch);
  * @return Góc hướng (0-360 độ).
  */
 float ICM20948_GetHeading(ICM20948_Data *data);
+
+void ICM20948_CalibrateMag(ICM20948_Data *data, uint16_t samples);
 
 
 #ifdef __cplusplus
